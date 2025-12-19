@@ -1,0 +1,94 @@
+/* 
+  Theme: Farol da Graça
+  Colors: Azulejo Blue (#0047AB), Marble White (#FAFAFA), Sky Light (#E0F7FA)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --color-azulejo: #0047AB;
+  --color-azulejo-dark: #003380;
+  --color-sand: #F5F5DC;
+  --color-sky: #E0F7FA;
+  --color-white: #FAFAFA;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--color-white);
+  color: #1a202c;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Azulejo Pattern Effect - CSS Generated */
+.bg-azulejo {
+  background-color: #fdfdfd;
+  background-image: 
+    linear-gradient(45deg, #0047AB22 25%, transparent 25%, transparent 75%, #0047AB22 75%, #0047AB22),
+    linear-gradient(45deg, #0047AB22 25%, transparent 25%, transparent 75%, #0047AB22 75%, #0047AB22);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+}
+
+.border-azulejo {
+  border: 2px solid var(--color-azulejo);
+  position: relative;
+}
+
+.border-azulejo::after {
+  content: '';
+  position: absolute;
+  top: 4px; left: 4px; right: 4px; bottom: 4px;
+  border: 1px solid var(--color-azulejo);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Animations */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ocean-gradient {
+  background: linear-gradient(180deg, rgba(0,71,171,0.05) 0%, rgba(255,255,255,1) 100%);
+}
+
+.glow-hover {
+  transition: all 0.3s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 15px rgba(0, 71, 171, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-azulejo); 
+}
