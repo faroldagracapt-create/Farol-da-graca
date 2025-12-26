@@ -1,3 +1,117 @@
+const SUPABASE_URL = 'https://https://hdqkczgbekklpcwvdrgq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkcWtjemdiZWtrbHBjd3ZkcmdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3MDg3MDYsImV4cCI6MjA4MjI4NDcwNn0.4xzMWcU4KzT6dm61x_AP4NFaEzZxtXbbt3tvTwk43sU';
+```
+
+---
+
+## **🗄️ PASSO 3: CRIAR TABELAS NO SUPABASE**
+
+No Supabase, clique em **🗄️ Table Editor** → **New table**
+
+### **Tabela 1: `users`**
+```
+Nome: users
+Colunas:
+- id: uuid (Primary, default: gen_random_uuid())
+- created_at: timestamp (default: now())
+- name: text
+- email: text (unique)
+- password: text
+- church: text (nullable)
+- role: text (default: 'user')
+```
+
+### **Tabela 2: `journal_entries`**
+```
+Nome: journal_entries
+Colunas:
+- id: uuid (Primary, default: gen_random_uuid())
+- created_at: timestamp (default: now())
+- user_id: uuid (foreign key → users.id)
+- content: text
+- encrypted: boolean (default: true)
+```
+
+### **Tabela 3: `mood_checkins`**
+```
+Nome: mood_checkins
+Colunas:
+- id: uuid (Primary, default: gen_random_uuid())
+- created_at: timestamp (default: now())
+- user_id: uuid (foreign key → users.id)
+- mood: text
+```
+
+### **Tabela 4: `resources`**
+```
+Nome: resources
+Colunas:
+- id: uuid (Primary, default: gen_random_uuid())
+- created_at: timestamp (default: now())
+- title: text
+- category: text
+- summary: text (nullable)
+- content: text (nullable)
+- image_url: text (nullable)
+- published: boolean (default: true)
+```
+
+### **Tabela 5: `site_config`**
+```
+Nome: site_config
+Colunas:
+- id: uuid (Primary, default: gen_random_uuid())
+- key: text (unique)
+- value: text
+- updated_at: timestamp (default: now())
+```
+
+---
+
+## **🔒 PASSO 4: ATIVAR SEGURANÇA (RLS)**
+
+Para cada uma das 5 tabelas:
+
+1. Clique na tabela
+2. Clique em **"RLS"** (canto superior direito)
+3. Clique em **"Enable RLS"**
+4. Clique em **"New Policy"**
+5. Escolha: **"Enable read access for all users"**
+6. Clique em **"Review"** → **"Save policy"**
+
+Repita para **TODAS as 5 tabelas**.
+
+---
+
+## **🚀 PASSO 5: COMO ABRIR E USAR**
+
+### **Para testar localmente:**
+
+1. **Abra o arquivo `admin-v2.html` no navegador**
+   - Clique com botão direito → "Abrir com" → Chrome/Firefox
+   
+2. **Primeira vez:**
+   - Crie uma conta admin usando um email com "admin" (ex: `admin@faroldagraca.pt`)
+   
+3. **Login:**
+   - Use o email e password que criou
+
+4. **Você verá o painel com:**
+   - ✅ Dashboard em tempo real
+   - ✅ Lista de utilizadores
+   - ✅ Editor de conteúdo
+   - ✅ Gestão de recursos
+   - ✅ Configurações
+
+### **Para colocar online:**
+
+1. **Faça upload no GitHub:**
+   - Adicione os 3 arquivos novos: `config.js`, `auth-v2.js`, `admin-v2.html`
+   - Faça commit e push
+
+2. **Acesse:**
+```
+   https://faroldagracapt-create.github.io/Farol-da-graca/admin-v2.html
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
