@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Teste | Farol da Graça</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen flex items-center justify-center p-6">
+
+<div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full p-8">
+    
+    <!-- Header -->
+    <div class="text-center mb-8">
+        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full mb-4">
+            <i data-lucide="shield-check" class="w-10 h-10 text-white"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">✅ Painel Admin Funcionando!</h1>
+        <p class="text-gray-600">Teste de conexão bem-sucedido</p>
+    </div>
+
+    <!-- Status Cards -->
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl p-4 text-center">
+            <i data-lucide="check-circle" class="w-8 h-8 text-green-600 mx-auto mb-2"></i>
+            <p class="font-bold text-green-800">Arquivo Carregado</p>
+            <p class="text-xs text-green-600 mt-1">admin-teste.html OK</p>
+        </div>
+        
+        <div id="supabase-status" class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4 text-center">
+            <i data-lucide="database" class="w-8 h-8 text-yellow-600 mx-auto mb-2"></i>
+            <p class="font-bold text-yellow-800">Supabase</p>
+            <p class="text-xs text-yellow-600 mt-1">Verificando...</p>
+        </div>
+        
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 text-center">
+            <i data-lucide="github" class="w-8 h-8 text-blue-600 mx-auto mb-2"></i>
+            <p class="font-bold text-blue-800">GitHub Pages</p>
+            <p class="text-xs text-blue-600 mt-1">Ativo</p>
+        </div>
+    </div>
+
+    <!-- Configuration Form -->
+    <div class="bg-gray-50 rounded-xl p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+            Configurar Supabase
+        </h2>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">Project URL do Supabase</label>
+                <input type="text" id="supabase-url" placeholder="https://xxxxx.supabase.co" 
+                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">API Key (anon/public)</label>
+                <input type="text" id="supabase-key" placeholder="eyJhbGciOiJ..." 
+                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none">
+            </div>
+            
+            <button onclick="testConnection()" 
+                class="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-lg hover:from-blue-700 hover:to-purple-700 shadow-lg transition">
+                <i data-lucide="zap" class="w-5 h-5 inline mr-2"></i>
+                Testar Conexão
+            </button>
+        </div>
+    </div>
+
+    <!-- Connection Result -->
+    <div id="connection-result" class="hidden"></div>
+
+    <!-- Quick Actions -->
+    <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <a href="index.html" class="flex items-center justify-center gap-3 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-blue-400 hover:shadow-md transition">
+            <i data-lucide="home" class="w-5 h-5 text-blue-600"></i>
+            <span class="font-medium">Voltar ao Site</span>
+        </a>
+        
+        <a href="login.html" class="flex items-center justify-center gap-3 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-purple-400 hover:shadow-md transition">
+            <i data-lucide="log-in" class="w-5 h-5 text-purple-600"></i>
+            <span class="font-medium">Fazer Login</span>
+        </a>
+    </div>
+
+    <!-- Instructions -->
+    <div class="bg-blue-50 border-l-4 border-blue-600 rounded-lg p-4">
+        <h3 class="font-bold text-blue-900 mb-2 flex items-center gap-2">
+            <i data-lucide="info" class="w-5 h-5"></i>
+            Próximos Passos
+        </h3>
+        <ol class="text-sm text-blue-800 space-y-2 ml-6 list-decimal">
+            <li>Crie seu projeto no <a href="https://supabase.com" target="_blank" class="font-bold underline">Supabase</a></li>
+            <li>Copie a <strong>Project URL</strong> e <strong>API Key</strong></li>
+            <li>Cole acima e clique em "Testar Conexão"</li>
+            <li>Se conectar, você pode criar as tabelas no Supabase</li>
+            <li>Depois, use o painel admin completo (admin-v2.html)</li>
+        </ol>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-8 pt-6 border-t border-gray-200">
+        <p class="text-sm text-gray-500">
+            🚀 Farol da Graça - Sistema de Administração V2
+        </p>
+        <p class="text-xs text-gray-400 mt-1">
+            Arquivo de teste para verificar instalação
+        </p>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+lucide.createIcons();
+
+async function testConnection() {
+    const url = document.getElementById('supabase-url').value.trim();
+    const key = document.getElementById('supabase-key').value.trim();
+    const resultDiv = document.getElementById('connection-result');
+    const statusCard = document.getElementById('supabase-status');
+    
+    if (!url || !key) {
+        resultDiv.innerHTML = `
+            <div class="bg-red-50 border-2 border-red-200 rounded-xl p-4 text-center">
+                <i data-lucide="alert-circle" class="w-8 h-8 text-red-600 mx-auto mb-2"></i>
+                <p class="font-bold text-red-800">Erro</p>
+                <p class="text-sm text-red-600">Por favor, preencha URL e API Key</p>
+            </div>
+        `;
+        resultDiv.classList.remove('hidden');
+        lucide.createIcons();
+        return;
+    }
+    
+    // Show loading
+    statusCard.innerHTML = `
+        <div class="animate-spin w-8 h-8 border-4 border-yellow-600 border-t-transparent rounded-full mx-auto mb-2"></div>
+        <p class="font-bold text-yellow-800">Testando...</p>
+        <p class="text-xs text-yellow-600 mt-1">Conectando</p>
+    `;
+    
+    try {
+        const supabase = window.supabase.createClient(url, key);
+        
+        // Test connection by trying to query a table
+        const { data, error } = await supabase
+            .from('users')
+            .select('count', { count: 'exact', head: true });
+        
+        if (error && error.message.includes('relation "public.users" does not exist')) {
+            // Table doesn't exist yet, but connection works
+            statusCard.innerHTML = `
+                <i data-lucide="check-circle" class="w-8 h-8 text-green-600 mx-auto mb-2"></i>
+                <p class="font-bold text-green-800">Conectado!</p>
+                <p class="text-xs text-green-600 mt-1">Tabelas pendentes</p>
+            `;
+            
+            resultDiv.innerHTML = `
+                <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="alert-triangle" class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-yellow-900 mb-2">✅ Conexão OK, mas faltam tabelas</h3>
+                            <p class="text-sm text-yellow-800 mb-3">
+                                O Supabase está funcionando, mas você ainda precisa criar as tabelas.
+                            </p>
+                            <p class="text-sm text-yellow-800 font-bold mb-2">Crie estas tabelas no Supabase:</p>
+                            <ul class="text-sm text-yellow-700 space-y-1 ml-4 list-disc">
+                                <li><code class="bg-yellow-100 px-2 py-0.5 rounded">users</code></li>
+                                <li><code class="bg-yellow-100 px-2 py-0.5 rounded">journal_entries</code></li>
+                                <li><code class="bg-yellow-100 px-2 py-0.5 rounded">mood_checkins</code></li>
+                                <li><code class="bg-yellow-100 px-2 py-0.5 rounded">resources</code></li>
+                                <li><code class="bg-yellow-100 px-2 py-0.5 rounded">site_config</code></li>
+                            </ul>
+                            <a href="https://supabase.com/dashboard" target="_blank" 
+                                class="inline-block mt-4 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 text-sm font-medium">
+                                Ir para Supabase Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else if (error) {
+            throw error;
+        } else {
+            // Perfect connection with tables
+            statusCard.innerHTML = `
+                <i data-lucide="check-circle" class="w-8 h-8 text-green-600 mx-auto mb-2"></i>
+                <p class="font-bold text-green-800">Perfeito!</p>
+                <p class="text-xs text-green-600 mt-1">Tudo OK</p>
+            `;
+            
+            resultDiv.innerHTML = `
+                <div class="bg-green-50 border-2 border-green-200 rounded-xl p-6">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="check-circle-2" class="w-8 h-8 text-green-600 flex-shrink-0"></i>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-green-900 mb-2">🎉 Tudo Funcionando Perfeitamente!</h3>
+                            <p class="text-sm text-green-800 mb-4">
+                                Conexão com Supabase estabelecida e tabelas criadas.
+                            </p>
+                            <p class="text-sm text-green-800 mb-2 font-bold">Agora você pode:</p>
+                            <div class="grid gap-2">
+                                <a href="admin-v2.html" class="block px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-center font-medium">
+                                    Abrir Painel Admin Completo →
+                                </a>
+                                <a href="login.html?mode=register" class="block px-4 py-2 bg-white border-2 border-green-600 text-green-700 rounded-lg hover:bg-green-50 text-center font-medium">
+                                    Criar Conta Admin
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Save to localStorage for config.js to use
+            localStorage.setItem('farol_supabase_url', url);
+            localStorage.setItem('farol_supabase_key', key);
+        }
+        
+    } catch (error) {
+        statusCard.innerHTML = `
+            <i data-lucide="x-circle" class="w-8 h-8 text-red-600 mx-auto mb-2"></i>
+            <p class="font-bold text-red-800">Erro</p>
+            <p class="text-xs text-red-600 mt-1">Falha na conexão</p>
+        `;
+        
+        resultDiv.innerHTML = `
+            <div class="bg-red-50 border-2 border-red-200 rounded-xl p-4">
+                <div class="flex items-start gap-3">
+                    <i data-lucide="alert-circle" class="w-6 h-6 text-red-600 flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="font-bold text-red-900 mb-2">❌ Erro na Conexão</h3>
+                        <p class="text-sm text-red-800 mb-2">${error.message}</p>
+                        <p class="text-sm text-red-700">Verifique se a URL e API Key estão corretas.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    resultDiv.classList.remove('hidden');
+    lucide.createIcons();
+}
+
+// Check if we have saved credentials
+window.addEventListener('load', () => {
+    const savedUrl = localStorage.getItem('farol_supabase_url');
+    const savedKey = localStorage.getItem('farol_supabase_key');
+    
+    if (savedUrl) document.getElementById('supabase-url').value = savedUrl;
+    if (savedKey) document.getElementById('supabase-key').value = savedKey;
+});
+</script>
+
+</body>
+</html>
